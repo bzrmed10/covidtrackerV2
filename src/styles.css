@@ -1,1 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
+.navbar{
+
+    height: 65px;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 0px 3px 28px rgba(0, 0, 0, 0.08);
+}
+.navbar-logo{
+    margin: auto;
+   
+}
+
+.logo{
+    width: 120px;
+}
+.boxStatus{
+    background: #FFFFFF;
+    box-shadow: 0px 3px 28px rgba(0, 0, 0, 0.08);
+    border-radius: 12px
+
+}
+  .d1{border: 1px solid #67b7dc;}
+  .d2{border: 1px solid #6771dc;}
+  .d3{border: 1px solid #a367dc;}
+  .d4{border: 1px solid #dc67ce;}
+
+  .container {
+    font-size: 30px;
+    color: #797979;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    display: grid;
+    grid-gap: 10px;
+
+  
+  }
+
+  .boxcontainer{
+      display: flex;
+  }
+  @media (max-width: 576px) { 
+    .container {
+        grid-template-columns: 1fr 1fr ;
+        min-height: 400px;
+      }
+   }
+   @media (min-width: 576px) { 
+    .container {
+        grid-template-columns: 1fr 1fr ;
+        min-height: 400px;
+      }
+   }
+   @media (min-width: 768px) { 
+    .container {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        min-height: 150px;
+      }
+   }
+
+  .d0{
+         height: 20px;;
+
+  }
