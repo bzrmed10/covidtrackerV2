@@ -3,6 +3,8 @@ import { GlobalDataSummary } from 'src/app/models/global-data';
 import { DataServiceService } from 'src/app/services/data-service.service';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { GetDataAction } from 'src/app/store/data.actions';
 
 @Component({
   selector: 'app-menu',
@@ -14,15 +16,12 @@ export class MenuComponent implements OnInit {
   defaultCountry :string;
   countries : string[] = [];
   data : GlobalDataSummary[];
-  dataMap;
-  totalActive;
-  totalComfirmed  ;
-  totalDeath ;
-  totalRecovered ;
+  today = new Date();
 
   constructor(private dataService : DataServiceService,
     public route :ActivatedRoute,
-    public router :Router) { }
+    public router :Router,
+    private store : Store<any>) { }
 
   ngOnInit(): void {
     
@@ -40,7 +39,8 @@ export class MenuComponent implements OnInit {
       })
       
     })).subscribe(()=>{
-         this.onChangeCountry(this.defaultCountry);
+        this.store.dispatch(new GetDataAction(this.defaultCountry));
+
     });
   
   }
@@ -49,25 +49,7 @@ export class MenuComponent implements OnInit {
 
   onChangeCountry(country : string){
     this.router.navigate(['/home',country]);
-    let items = this.data.filter(item => item.country == country);
-    this.dataMap = items;
-    console.log(this.data);
-    this.dataService.dataChange.next(this.dataMap);
-    this.dataService.caseType.next('all');
-
-    this.data.forEach(cs =>{
-      
-      if(cs.country === country){
-        this.totalActive = cs.active;
-        this.totalComfirmed = cs.confirmed;
-        this.totalDeath = cs.deaths;
-        this.totalRecovered = cs.recovered;
-      }
-      
-    })
-    
-   
-   
+    this.store.dispatch(new GetDataAction(country));   
   }
 
 

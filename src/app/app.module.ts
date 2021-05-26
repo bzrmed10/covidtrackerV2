@@ -10,6 +10,11 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HistoryComponent } from './components/history/history.component';
+import { StoreModule } from '@ngrx/store';
+import { DataEffects } from './store/data.effects';
+import { dataReducer } from './store/data.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,10 @@ import { HistoryComponent } from './components/history/history.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({ dataState :dataReducer }),
+    EffectsModule.forRoot([DataEffects]),
+    StoreDevtoolsModule.instrument(),
   ],
   providers: [],
   bootstrap: [AppComponent]

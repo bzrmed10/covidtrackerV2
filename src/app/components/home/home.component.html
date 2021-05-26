@@ -1,44 +1,72 @@
- 
-<div class="container">
+<ng-container  *ngIf="dataState$ | async as state" [ngSwitch] ="state.dataState" >
+
+    <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+        <div class="alert alert-warning my-2" role="alert">{{state.errorMessage}}</div>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+        <div class="container">
   
-<div class="d1 boxStatus">
-    <div class="iconContainer">
-        <img src="/assets/icon/confirmed2.svg"  
-        alt="confirmed" class="homeIcon">
-    </div>
-    <div class="boxcontainer">
-    <p>Confirmed</p>
-    <p class="number blue">1000</p>
-    </div>
-</div>
-<div class="d2 boxStatus">
-    <div class="iconContainer">
-        <img src="/assets/icon/death3.svg"  
-        alt="death" class="homeIcon">
-    </div>
-    <div class="boxcontainer">
-        <p>Deaths</p>
-        <p class="number red">14</p>
-        </div>
-</div>
-<div class="d3 boxStatus">
-    <div class="iconContainer">
-        <img src="/assets/icon/recovered3.svg"  
-        alt="recovered" class="homeIcon">
-    </div>
-    <div class="boxcontainer">
-        <p>Recovered</p>
-        <p class="number green">1802</p>
-    </div>
-</div>
-<div class="d4 boxStatus">
-    <div class="iconContainer">
-        <img src="/assets/icon/active3.svg"  
-        alt="active" class="homeIcon">
-    </div>
-    <div class="boxcontainer">
-        <p>Active</p>
-        <p class="number orange">2514</p>
-    </div>
-</div>
-</div>
+            <div class="d1 boxStatus">
+                <div class="iconContainer">
+                    <img src="/assets/icon/confirmed2.svg"  
+                    alt="confirmed" class="homeIcon">
+                </div>
+                <div class="boxcontainer">
+                <p class="boxTitle" >Confirmed</p>
+                <ng-container *ngIf="state.dataState == DataStateEnum.LOADING">
+                    <div class="d-flex align-items-center">
+                        <div class="spinner-grow spinner-grow-sm blue"></div>
+                     </div>
+                </ng-container>
+                <p class="number blue" *ngIf="state.dataState == DataStateEnum.LOADED" >{{ state.countryData[0].confirmed | number}}</p>
+                </div>
+            </div>
+            <div class="d2 boxStatus">
+                <div class="iconContainer">
+                    <img src="/assets/icon/death3.svg"  
+                    alt="death" class="homeIcon">
+                </div>
+                <div class="boxcontainer">
+                    <p class="boxTitle">Deaths</p>
+                    <ng-container *ngIf="state.dataState == DataStateEnum.LOADING">
+                        <div class="d-flex align-items-center">
+                            <div class="spinner-grow spinner-grow-sm red"></div>
+                         </div>
+                    </ng-container>
+                    <p class="number red" *ngIf="state.dataState == DataStateEnum.LOADED">{{ state.countryData[0].deaths | number}}</p>
+                    </div>
+            </div>
+            <div class="d3 boxStatus">
+                <div class="iconContainer">
+                    <img src="/assets/icon/recovered3.svg"  
+                    alt="recovered" class="homeIcon">
+                </div>
+                <div class="boxcontainer">
+                    <p class="boxTitle">Recovered</p>
+                    <ng-container *ngIf="state.dataState == DataStateEnum.LOADING">
+                        <div class="d-flex align-items-center">
+                            <div class="spinner-grow spinner-grow-sm green"></div>
+                         </div>
+                    </ng-container>
+                    <p class="number green" *ngIf="state.dataState == DataStateEnum.LOADED">{{ state.countryData[0].recovered | number}}</p>
+                </div>
+            </div>
+            <div class="d4 boxStatus">
+                <div class="iconContainer">
+                    <img src="/assets/icon/active3.svg"  
+                    alt="active" class="homeIcon">
+                </div>
+                <div class="boxcontainer">
+                    <p class="boxTitle">Active</p>
+                    <ng-container *ngIf="state.dataState == DataStateEnum.LOADING">
+                        <div class="d-flex align-items-center">
+                            <div class="spinner-grow spinner-grow-sm orange"></div>
+                         </div>
+                    </ng-container>
+                    <p class="number orange" *ngIf="state.dataState == DataStateEnum.LOADED">{{ state.countryData[0].active | number}}</p>
+                </div>
+            </div>
+            </div>
+    </ng-container>
+</ng-container>
+
