@@ -40,7 +40,6 @@ body {
     background: rgb(255, 255, 255);
     display: grid;
     grid-gap: 10px;
-
   }
 
   .boxcontainer{
@@ -168,7 +167,8 @@ body {
       border: 1px solid #F2F2F2 !important;
         border-radius: 12px !important;
         background-color:#F2F2F2 !important;
-        /*opacity: 80% !important;*/
+        color : #2125298c !important;
+        
     }
     
     button#search-addon {
@@ -192,6 +192,7 @@ body {
 
     .calendar{
       width: 30px;
+      margin-right: 5px;
     }
     .date{
     background: #FFFFFF;
@@ -199,16 +200,18 @@ body {
     border-radius: 12px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     height: 45px;
     margin-left:12px ;
     margin-right: 12px;
     margin-bottom: 10px;
+
     }
    
-   /* .date p{
-      opacity: 70% !important;
+    .textOpacity{
+      opacity: 70% ;
     }
+    /*
     .boxTitle{
       opacity: 80% !important;
     }*/

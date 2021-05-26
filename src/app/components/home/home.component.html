@@ -12,7 +12,7 @@
                     alt="confirmed" class="homeIcon">
                 </div>
                 <div class="boxcontainer">
-                <p class="boxTitle" >Confirmed</p>
+                <p class="boxTitle textOpacity" >Confirmed</p>
                 <ng-container *ngIf="state.dataState == DataStateEnum.LOADING">
                     <div class="d-flex align-items-center">
                         <div class="spinner-grow spinner-grow-sm blue"></div>
@@ -27,7 +27,7 @@
                     alt="death" class="homeIcon">
                 </div>
                 <div class="boxcontainer">
-                    <p class="boxTitle">Deaths</p>
+                    <p class="boxTitle textOpacity">Deaths</p>
                     <ng-container *ngIf="state.dataState == DataStateEnum.LOADING">
                         <div class="d-flex align-items-center">
                             <div class="spinner-grow spinner-grow-sm red"></div>
@@ -42,7 +42,7 @@
                     alt="recovered" class="homeIcon">
                 </div>
                 <div class="boxcontainer">
-                    <p class="boxTitle">Recovered</p>
+                    <p class="boxTitle textOpacity">Recovered</p>
                     <ng-container *ngIf="state.dataState == DataStateEnum.LOADING">
                         <div class="d-flex align-items-center">
                             <div class="spinner-grow spinner-grow-sm green"></div>
@@ -57,7 +57,7 @@
                     alt="active" class="homeIcon">
                 </div>
                 <div class="boxcontainer">
-                    <p class="boxTitle">Active</p>
+                    <p class="boxTitle textOpacity">Active</p>
                     <ng-container *ngIf="state.dataState == DataStateEnum.LOADING">
                         <div class="d-flex align-items-center">
                             <div class="spinner-grow spinner-grow-sm orange"></div>
