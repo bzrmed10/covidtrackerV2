@@ -30,11 +30,11 @@
        
         <form class="select">
             <div class="input-group rounded">
-                <select class="form-control selectCountry" placeholder="Choose Country">
-                    <option>Morocco</option>
-                    <option>Denmark</option>
-                    <option>France</option>
-                    <option>Spain</option>
+                <select class="form-control selectCountry" 
+                placeholder="Choose Country" name="country" #inputCountry
+                [(ngModel)]="defaultCountry"
+                (change)="onChangeCountry(inputCountry.value)">
+                    <option value="{{country}}" *ngFor="let country of countries">{{ country }}</option>
                   </select>
               <button type="submit" class="input-group-text border-0" id="search-addon">
                 <img src="/assets/icon/earth.svg"  
