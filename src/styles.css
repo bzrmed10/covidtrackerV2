@@ -209,7 +209,7 @@ body {
     }
    
     .textOpacity{
-      opacity: 70% ;
+      color : #212529a1 !important;
     }
     /*
     .boxTitle{
