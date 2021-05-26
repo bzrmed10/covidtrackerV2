@@ -1,35 +1,33 @@
 
-        <div class="menu mt-3 scroll">
+        
     
-            <ul class="menuList">
+            <div class="menuList">
                 
-                    <li>
-                        <div class="menuContainer">
+                
+                        <div class="menuContainer" routerLink="home" routerLinkActive="selected">
                             <img src="/assets/icon/home.svg"  
                             alt="home" class="menuIcon">
                             <a class="btnMenu" >Home</a>
                             
                          </div>
-                    </li>
-                    <li>
-                        <div class="menuContainer">
+                    
+                        <div class="menuContainer" routerLink="statistics" routerLinkActive="selected">
                             <img src="/assets/icon/chart.svg"  
                             alt="home" class="menuIcon">
                             <a class="btnMenu" >Statistics</a>
                          </div>
-                    </li>
-                    <li>
-                        <div class="menuContainer">
+                    
+                        <div class="menuContainer" routerLink="history" routerLinkActive="selected">
                             <img src="/assets/icon/history.svg"  
                             alt="home" class="menuIcon">
                             <a class="btnMenu" >History</a>
                          </div>
-                    </li>                           
+                                               
               
                 
-                </ul>
+                </div>
 
-        </div>
+       
         <form class="select">
             <div class="input-group rounded">
                 <select class="form-control selectCountry" placeholder="Choose Country">
@@ -40,7 +38,7 @@
                   </select>
               <button type="submit" class="input-group-text border-0" id="search-addon">
                 <img src="/assets/icon/earth.svg"  
-                            alt="home" class="earth">
+                            alt="earth" class="earth">
               </button>
             </div>        
         </form>

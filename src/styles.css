@@ -106,25 +106,16 @@ body {
   .orange{
     color: #FFD060;
   }
-  ul.menuList{
+  .menuList{
     display: flex;
-    justify-items: end;
+    text-align: center;
+    margin: 10px ;
   }
 
-  ul.menuList li {
-    display: inline;
-    text-align: center;
-    padding: 2px ;
-    }
-  
-/*.menuList {
-    display: flex;
-    text-align: center;
-    padding: 2px ;
-    width: 19%;
-    }*/
 
-   
+
+ 
+
 
       .menu{
         margin: 12px;
@@ -145,7 +136,6 @@ body {
       color: #82B2E4;
       order: 0;
       margin: 0px 5px;
-      /*border: 1px solid #82B2E4;*/
       box-shadow: 0px 3px 28px rgba(0, 0, 0, 0.08);
       align-items: center;
       cursor: pointer;
@@ -153,6 +143,9 @@ body {
     }
     .menuIcon{
       width: 25px;
+    }
+    .selected {
+      border: 1px solid #82B2E4;
     }
 
    /* .form-control.selectCountry{
