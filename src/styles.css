@@ -168,7 +168,7 @@ body {
       border: 1px solid #F2F2F2 !important;
         border-radius: 12px !important;
         background-color:#F2F2F2 !important;
-        opacity: 80%;
+        opacity: 80% !important;
     }
     
     button#search-addon {
@@ -206,8 +206,8 @@ body {
     margin-bottom: 10px;
     }
     .date p{
-      opacity: 70%;
+      opacity: 70% !important;
     }
     .boxTitle{
-      opacity: 80%;
+      opacity: 80% !important;
     }
