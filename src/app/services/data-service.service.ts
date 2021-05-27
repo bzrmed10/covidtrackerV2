@@ -3,6 +3,7 @@ import { GlobalDataSummary } from '../models/global-data';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { DateCountryData } from '../models/date-country-data';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,9 @@ export class DataServiceService {
 
   public dataChange= new Subject<GlobalDataSummary[]>();
   public caseType = new Subject<string>();
+  private dateCountryDataUrl = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv';
+  private dateDeathByCountryDataUrl ='https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
+  private dateRecoveredByCountryDataUrl = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv';
   private baseUrl = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/';
   private globalDataUrl = '';
   extension = '.csv';
@@ -77,4 +81,119 @@ export class DataServiceService {
       })
     )
   }
+
+  getDateCountryData(){
+    return this.http.get(this.dateCountryDataUrl,{responseType : 'text'})
+    .pipe(map(result=>{
+      let rows = result.split('\n');
+      let mainData = {};
+      let header = rows[0];
+      let dates = header.split(/,(?=\S)/);
+      dates.splice(0 , 4);
+      rows.splice(0 , 1);
+      rows.forEach(row =>{
+        let cols = row.split(/,(?=\S)/);
+        let country = cols[1];
+        cols.splice(0 , 4);
+        mainData[country]=[];
+        cols.forEach((value,index)=>{
+          let dc :DateCountryData = {
+            cases : +value,
+            country : country,
+            date : new Date(Date.parse(dates[index]))
+          }
+          mainData[country].push(dc);
+          
+          
+        })
+        
+        
+        
+      })
+      return mainData;
+      
+    }));
+  }
+
+  getDateRecoveredByCountryData(){
+    return this.http.get(this.dateRecoveredByCountryDataUrl,{responseType : 'text'})
+    .pipe(map(result=>{
+      let rows = result.split('\n');
+      let mainData = {};
+      let header = rows[0];
+      let dates = header.split(/,(?=\S)/);
+      dates.splice(0 , 4);
+      rows.splice(0 , 1);
+      rows.forEach(row =>{
+        let cols = row.split(/,(?=\S)/);
+        let country = cols[1];
+        cols.splice(0 , 4);
+        mainData[country]=[];
+        cols.forEach((value,index)=>{
+          let dc :DateCountryData = {
+            cases : +value,
+            country : country,
+            date : new Date(Date.parse(dates[index]))
+          }
+          mainData[country].push(dc);
+          
+          
+        })
+        
+        
+        
+      })
+      return mainData;
+      
+    }));
+  }
+
+  getDateDeathByCountryData(){
+    return this.http.get(this.dateDeathByCountryDataUrl,{responseType : 'text'})
+    .pipe(map(result=>{
+      let rows = result.split('\n');
+      let mainData = {};
+      let header = rows[0];
+      let dates = header.split(/,(?=\S)/);
+      dates.splice(0 , 4);
+      rows.splice(0 , 1);
+      rows.forEach(row =>{
+        let cols = row.split(/,(?=\S)/);
+        let country = cols[1];
+        cols.splice(0 , 4);
+        mainData[country]=[];
+        cols.forEach((value,index)=>{
+          let dc :DateCountryData = {
+            cases : +value,
+            country : country,
+            date : new Date(Date.parse(dates[index]))
+          }
+          mainData[country].push(dc);
+          
+          
+        })
+        
+        
+        
+      })
+      return mainData;
+      
+    }));
+  }
+
+  getNumCasePerDay(data:DateCountryData []){
+
+    for(let i=0;i<data.length;i++){
+      if(i == 0) {
+        data[i].numbercasesperdate = data[i].cases;
+      }
+      else{
+        data[i].numbercasesperdate =  data[i].cases-data[i-1].cases;
+      }
+      
+    }
+    
+    return data;
+  }
+  
 }

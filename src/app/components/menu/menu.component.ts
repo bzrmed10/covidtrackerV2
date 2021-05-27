@@ -4,7 +4,7 @@ import { DataServiceService } from 'src/app/services/data-service.service';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { GetDataAction } from 'src/app/store/data.actions';
+import { GetCumulGraphDataAction, GetDataAction } from 'src/app/store/data.actions';
 
 @Component({
   selector: 'app-menu',
@@ -25,6 +25,8 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     
+
+
     if(this.route.snapshot.params['country']){
       this.defaultCountry = this.route.snapshot.params['country'];
 
@@ -48,9 +50,13 @@ export class MenuComponent implements OnInit {
 
 
   onChangeCountry(country : string){
+    this.defaultCountry = country;
     this.router.navigate(['/home',country]);
     this.store.dispatch(new GetDataAction(country));   
   }
 
+  getcharts(){
+    this.store.dispatch(new GetCumulGraphDataAction(this.defaultCountry));
+  }
 
 }

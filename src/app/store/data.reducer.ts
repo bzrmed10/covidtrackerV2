@@ -14,6 +14,12 @@ export enum DataStateEnum {
 export interface DataState {
     country: string,
     countryData : GlobalDataSummary,
+    chartData : {
+        confirmed : [], 
+        deaths: [],
+        recovred: [],
+        dates:[]
+    },
     errorMessage : string,
     dataState : DataStateEnum,
     
@@ -23,6 +29,12 @@ export interface DataState {
 const INIT_STATE :DataState = {
     country: "",
     countryData : null,
+    chartData : {
+        confirmed : [], 
+        deaths: [],
+        recovred: [],
+        dates: []
+    },
     errorMessage : "",
     dataState : DataStateEnum.INITIAL ,
 
@@ -43,14 +55,35 @@ export function dataReducer(state = INIT_STATE ,action :Action ) :DataState {
                 countryData:(<DataActions>action).payload
                   
             }
-            case DataActionsTypes.GET_DATA_ERROR: 
+        case DataActionsTypes.GET_DATA_ERROR: 
             return {
                 ...state ,
                 dataState:DataStateEnum.ERROR,
                 errorMessage:(<DataActions>action).payload
                   
             }      
-
+        case DataActionsTypes.GET_CUMUL_GRAPH_DATA: 
+            return {
+                ...state ,
+                dataState:DataStateEnum.LOADING, 
+            }
+        case DataActionsTypes.GET_CUMUL_GRAPH_DATA_SUCCESS: 
+            return {
+                ...state ,
+                dataState:DataStateEnum.LOADED,
+                chartData:{
+                    confirmed : (<DataActions>action).payload.confirmed,
+                    deaths : (<DataActions>action).payload.deaths,
+                    recovred:(<DataActions>action).payload.recovered,
+                    dates :(<DataActions>action).payload.dates
+                } 
+            } 
+        case DataActionsTypes.GET_CUMUL_GRAPH_DATA_ERROR: 
+          
+                return {
+                    ...state ,
+                    dataState:DataStateEnum.LOADED, 
+                }       
                   
         default : return {...state} 
     }

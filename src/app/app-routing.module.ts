@@ -9,6 +9,7 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path:'home/:country' ,component:HomeComponent },
     { path: 'statistics', component: StatisticsComponent },
+    { path:'statistics/:country' ,component:HomeComponent },
     { path: 'history', component: HistoryComponent },
     ];
     

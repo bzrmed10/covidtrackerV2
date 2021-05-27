@@ -15,7 +15,8 @@ import { DataEffects } from './store/data.effects';
 import { dataReducer } from './store/data.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-
+import { HighchartsChartModule } from 'highcharts-angular';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,11 +31,13 @@ import { EffectsModule } from '@ngrx/effects';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    HighchartsChartModule,
     StoreModule.forRoot({ dataState :dataReducer }),
     EffectsModule.forRoot([DataEffects]),
     StoreDevtoolsModule.instrument(),
+
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
