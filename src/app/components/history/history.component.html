@@ -1,1 +1,50 @@
-<p>history works!</p>
+<div class="select">
+  <div class="input-group rounded">
+    <input class="form-control selectCountry" 
+    (keyup)="applyFilter($event)" placeholder="Search ..." #input />
+        
+  <button  class="input-group-text border-0" id="search-addon">
+    <img src="/assets/icon/loupe.svg"  
+                alt="search" class="earth">
+  </button>
+  </div>
+</div>
+
+<div class="containerChart">
+   
+    
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc" >
+  
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Date</b> </th>
+        <td mat-cell *matCellDef="let row"><b> {{row.date |date}}</b> </td>
+      </ng-container>
+      <ng-container matColumnDef="numbercasesperday">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Cases </b> </th>
+        <td mat-cell *matCellDef="let row" class="blue"><mat-icon style="font-size: 16px;">trending_up</mat-icon> + {{row.numbercasesperday | number}} </td>
+      </ng-container>
+
+    
+      <ng-container matColumnDef="numberdeathperday">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Deaths</b> </th>
+        <td mat-cell *matCellDef="let row" class="red"><mat-icon style="font-size: 16px;">report_problem</mat-icon> + {{row.numberdeathperday | number}} </td>
+      </ng-container>
+
+
+   
+      <ng-container matColumnDef="numberrecovredperday">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Recovred</b> </th>
+        <td mat-cell *matCellDef="let row" class="green"> <mat-icon style="font-size: 16px;">verified_user</mat-icon> + {{row.numberrecovredperday | number}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+    
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter </td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[ 10, 25,50, 100]" showFirstLastButtons></mat-paginator>
+  </div>

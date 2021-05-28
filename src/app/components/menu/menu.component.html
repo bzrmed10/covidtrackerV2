@@ -1,3 +1,4 @@
+
             <div class="menuList">
                         <div class="menuContainer" routerLink="home" routerLinkActive="selected">
                             <img src="/assets/icon/home.svg"  
@@ -12,14 +13,17 @@
                             <a class="btnMenu" >Statistics</a>
                          </div>
                     
-                        <div class="menuContainer" routerLink="history" routerLinkActive="selected">
+                        <div class="menuContainer" routerLink="history" routerLinkActive="selected" (click)="getHistoryTable()">
                             <img src="/assets/icon/history.svg"  
                             alt="home" class="menuIcon">
                             <a class="btnMenu" >History</a>
                          </div>
                 </div>
 
-       
+                <div class="date">
+                    <img src="/assets/icon/calendar.png"  
+                        alt="calendar" class="calendar"><p class="textOpacity">{{ today | date}}</p>
+                  </div>
         <form class="select">
             <div class="input-group rounded">
                 <select class="form-control selectCountry" 
@@ -34,10 +38,7 @@
               </button>
             </div>        
         </form>
-  <div class="date">
-    <img src="/assets/icon/calendar.png"  
-        alt="calendar" class="calendar"><p class="textOpacity">{{ today | date}}</p>
-  </div>
+
         
     
 

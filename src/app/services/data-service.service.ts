@@ -195,5 +195,27 @@ export class DataServiceService {
     
     return data;
   }
+
+  mergeData(tab1 :DateCountryData[],tab2:DateCountryData[],tab3:DateCountryData[]){
+    if(tab1.length == tab2.length && tab1.length == tab3.length){
+      let alldataByCountry =[];
+      for(let i=0;i<tab1.length;i++){
+        alldataByCountry.push({
+          'country':tab1[i].country,
+          'date':tab1[i].date,
+         // 'cases':tab1[i].cases,
+          'numbercasesperday':tab1[i].numbercasesperdate,
+         // 'deaths':tab2[i].cases,
+          'numberdeathperday':tab2[i].numbercasesperdate,
+          //'recovred':tab3[i].cases,
+          'numberrecovredperday':tab3[i].numbercasesperdate
+        });
+      }
+      return alldataByCountry;
+    }else{
+      console.log("tab not same length");
+    
+    }
+  }
   
 }

@@ -17,6 +17,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { DatePipe } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatIconModule} from '@angular/material/icon';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +40,11 @@ import { DatePipe } from '@angular/common';
     StoreModule.forRoot({ dataState :dataReducer }),
     EffectsModule.forRoot([DataEffects]),
     StoreDevtoolsModule.instrument(),
-
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

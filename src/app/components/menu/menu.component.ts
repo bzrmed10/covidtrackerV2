@@ -4,7 +4,7 @@ import { DataServiceService } from 'src/app/services/data-service.service';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { GetCumulGraphDataAction, GetDataAction } from 'src/app/store/data.actions';
+import { GetCumulGraphDataAction, GetDataAction, GetTableDataAction } from 'src/app/store/data.actions';
 
 @Component({
   selector: 'app-menu',
@@ -59,6 +59,10 @@ export class MenuComponent implements OnInit {
 
   getcharts(){
     this.store.dispatch(new GetCumulGraphDataAction(this.defaultCountry));
+  }
+
+  getHistoryTable(){
+    this.store.dispatch(new GetTableDataAction(this.defaultCountry));
   }
 
 }

@@ -10,10 +10,13 @@ import {
     GetDataActionSuccess,
     GetDataActionError,
     GetCumulGraphDataActionSuccess,
-    GetCumulGraphDataActionError
+    GetCumulGraphDataActionError,
+    GetTableDataActionSuccess,
+    GetTableDataActionError
 } from './data.actions';
 import { DatePipe } from '@angular/common';
 import { DateCountryData } from '../models/date-country-data';
+import { AllDataByCountry } from '../models/all-data-by-country';
 
 
 
@@ -127,21 +130,73 @@ export class DataEffects {
 
 
                    
-                    
-                 /*   return  this.dataService.getGlobalData()
-                    .pipe(
-                        map(result=>{
-                        this.data = result; 
-                        let items = this.data.filter(item => item.country == action.payload);
-                        return new GetDataActionSuccess(items);     
-                      }),
-                      catchError(
-                          (err)=>of(new GetDataActionError(err.message))
-                                )
-                          )*/
+                   
                     }))
             
         )
     
-    
+        getTableDataEffect:Observable<DataActions> = createEffect(
+            
+          ()=>this.effectActions.pipe(
+              ofType(DataActionsTypes.GET_TABLE_DATA),
+              mergeMap((action : DataActions)=>{
+                let tableCase = [];
+                let tabledays = [];
+                let tabledeath = [];
+                let tableRecovered = [];
+                let casesPerDay = [];
+                let deathPerDay = [];
+                let recoveredPerDay = [];
+                let dateCountryData;
+                let dateDeathByCountryData;
+                let dateRecovredByCountryData;
+                let selectedCountryData : DateCountryData [];
+                let selectedDeathByCountryData : DateCountryData [];
+                let selectedRecoveredByCountryData : DateCountryData [];
+                const one$: Observable<any> = this.dataService.getDateCountryData().pipe(
+                  map(result=>{
+                    
+                    dateCountryData = result;
+                    selectedCountryData = this.dataService.getNumCasePerDay(dateCountryData[action.payload]);
+                  })
+                );
+                const two$: Observable<any> = this.dataService.getDateDeathByCountryData().pipe(
+                  map(result2=>{
+                    dateDeathByCountryData = result2;
+                    selectedDeathByCountryData = this.dataService.getNumCasePerDay(dateDeathByCountryData[action.payload])
+                    
+                  })
+                );
+                const three$: Observable<any> =   this.dataService.getDateRecoveredByCountryData().pipe(
+                  map(result3=>{
+                      dateRecovredByCountryData = result3; 
+                      selectedRecoveredByCountryData = this.dataService.getNumCasePerDay(dateRecovredByCountryData[action.payload])
+                  })
+                );
+
+                return  combineLatest(
+                    [one$, two$, three$]
+                    ).pipe(
+
+                      map( result =>{
+                        let alldataByCountry :AllDataByCountry[];
+                        alldataByCountry = this.dataService.mergeData(selectedCountryData, selectedDeathByCountryData,selectedRecoveredByCountryData);
+                          
+                              return new GetTableDataActionSuccess(alldataByCountry);
+                              
+                        }),
+                        catchError(
+                          
+                            (err)=> of(new GetTableDataActionError(err.message))
+                                  )
+                    );
+
+
+
+
+                 
+                 
+                  }))
+          
+      )
     }

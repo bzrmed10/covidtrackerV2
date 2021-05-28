@@ -1,5 +1,6 @@
 
 import { Action } from "@ngrx/store";
+import { AllDataByCountry } from "../models/all-data-by-country";
 import { GlobalDataSummary } from "../models/global-data";
 import { DataActions, DataActionsTypes } from "./data.actions";
 
@@ -26,6 +27,7 @@ export interface DataState {
         recovred: [],
         dates:[]
     },
+    tableData : AllDataByCountry[],
     errorMessage : string,
     dataState : DataStateEnum,
     
@@ -47,6 +49,7 @@ const INIT_STATE :DataState = {
         recovred: [],
         dates: []
     },
+    tableData : [],
     errorMessage : "",
     dataState : DataStateEnum.INITIAL ,
 
@@ -104,10 +107,31 @@ export function dataReducer(state = INIT_STATE ,action :Action ) :DataState {
                
                 return {
                     ...state ,
-                    dataState:DataStateEnum.LOADED, 
+                    dataState:DataStateEnum.ERROR, 
                     errorMessage :(<DataActions>action).payload,
                 }       
-                  
+        case DataActionsTypes.GET_TABLE_DATA: 
+            
+                return {
+                    ...state ,
+                    dataState:DataStateEnum.LOADING, 
+                                
+                }
+        case DataActionsTypes.GET_TABLE_DATA_SUCCESS: 
+             let alldataByCountry :AllDataByCountry[];
+             alldataByCountry = (<DataActions>action).payload;
+                return {
+                    ...state ,
+                    dataState:DataStateEnum.LOADED, 
+                    tableData : alldataByCountry,        
+                }        
+        case DataActionsTypes.GET_CUMUL_GRAPH_DATA_ERROR: 
+               
+                return {
+                    ...state ,
+                    dataState:DataStateEnum.ERROR, 
+                    errorMessage :(<DataActions>action).payload,
+                }                   
         default : return {...state} 
     }
 }

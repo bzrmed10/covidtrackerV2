@@ -2,11 +2,11 @@ export interface AllDataByCountry {
     country ?: string,
     date ?: Date,
     cases ?: number,
-    numbercasesperdate ?: number,
+    numbercasesperday ?: number,
     deaths ?: number,
-    numberdeathperdate ?: number,
+    numberdeathperday ?: number,
     recovred ?: number,
-    numberrecovredperdate ?: number,
+    numberrecovredperday ?: number,
 
 
 }
