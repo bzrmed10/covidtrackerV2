@@ -55,6 +55,9 @@ export class DataEffects {
                   let tabledays = [];
                   let tabledeath = [];
                   let tableRecovered = [];
+                  let casesPerDay = [];
+                  let deathPerDay = [];
+                  let recoveredPerDay = [];
                   let dateCountryData;
                   let dateDeathByCountryData;
                   let dateRecovredByCountryData;
@@ -78,7 +81,7 @@ export class DataEffects {
                   const three$: Observable<any> =   this.dataService.getDateRecoveredByCountryData().pipe(
                     map(result3=>{
                         dateRecovredByCountryData = result3; 
-                      selectedRecoveredByCountryData = this.dataService.getNumCasePerDay(dateRecovredByCountryData[action.payload])
+                        selectedRecoveredByCountryData = this.dataService.getNumCasePerDay(dateRecovredByCountryData[action.payload])
                     })
                   );
 
@@ -90,20 +93,27 @@ export class DataEffects {
 
                             selectedCountryData.forEach(cs => {
                                 tableCase.push(cs.cases);    
+                                casesPerDay.push(cs.numbercasesperdate);
                                 tabledays.push( this.datepipe.transform(cs.date, 'yyyy/MM/dd')); 
+                      
                               });
                               selectedDeathByCountryData.forEach(cs => {
                                   tabledeath.push(cs.cases);
+                                  deathPerDay.push(cs.numbercasesperdate);
                               });
                               selectedRecoveredByCountryData.forEach(cs => {
                                 tableRecovered.push(cs.cases);
+                                recoveredPerDay.push(cs.numbercasesperdate);
                             });
                             
                                 return new GetCumulGraphDataActionSuccess(
                                     { dates : tabledays , 
                                       confirmed : tableCase,
                                       deaths : tabledeath,
-                                      recovered : tableRecovered
+                                      recovered : tableRecovered,
+                                      confirmedPerDay : casesPerDay,
+                                      deathPerDay : deathPerDay,
+                                      recoveredPerDay : recoveredPerDay
                                     });
                                 
                           }),

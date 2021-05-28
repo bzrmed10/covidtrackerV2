@@ -1,7 +1,29 @@
 <div class="containerChart">
+  <ng-container *ngIf="dataState == DataStateEnum.LOADING">
+    <div class="d-flex align-items-center">
+        <div class="spinner-grow spinner-grow blue"></div>
+     </div>
+  </ng-container>
+
+  <ng-container *ngIf="dataState == DataStateEnum.LOADED">
     <highcharts-chart 
     [Highcharts]="Highcharts"
     [options]="chartOptions"
     style="width: 100%; height: 500px; display: block;"
   ></highcharts-chart>
+</ng-container>
+</div>
+<div class="containerChart">
+  <ng-container *ngIf="dataState == DataStateEnum.LOADING">
+    <div class="d-flex align-items-center">
+        <div class="spinner-grow spinner-grow blue"></div>
+     </div>
+  </ng-container>
+  <ng-container *ngIf="dataState == DataStateEnum.LOADED">
+  <highcharts-chart 
+        [Highcharts]="HighchartsPerDay"
+        [options]="chartOptionsPerDay"
+        style="width: 100%; height: 500px; display: block;"
+  ></highcharts-chart>
+</ng-container>
 </div>

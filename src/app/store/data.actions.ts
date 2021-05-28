@@ -41,7 +41,9 @@ export class GetCumulGraphDataAction implements Action {
 export class GetCumulGraphDataActionSuccess implements Action {
 
     type : DataActionsTypes = DataActionsTypes.GET_CUMUL_GRAPH_DATA_SUCCESS;
-    constructor( public payload:{dates : number[] , confirmed : number[] , deaths : number[], recovered : number[]}){}
+    constructor( public payload:{dates : number[] , confirmed : number[] ,
+         deaths : number[], recovered : number[],confirmedPerDay : number[],
+          deathPerDay : number[],recoveredPerDay : number[]}){}
 }
 
 export class GetCumulGraphDataActionError implements Action {

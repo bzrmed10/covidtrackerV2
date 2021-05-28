@@ -230,3 +230,9 @@ body {
       color : #212529a1 !important;
     }
    
+
+    .align-items-center {
+      align-self: center!important;
+      align-items: center !important;
+      height: 500px;
+  }

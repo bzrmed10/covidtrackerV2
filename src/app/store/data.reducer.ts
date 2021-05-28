@@ -20,6 +20,12 @@ export interface DataState {
         recovred: [],
         dates:[]
     },
+    dailyChartData : {
+        confirmed : [], 
+        deaths: [],
+        recovred: [],
+        dates:[]
+    },
     errorMessage : string,
     dataState : DataStateEnum,
     
@@ -30,6 +36,12 @@ const INIT_STATE :DataState = {
     country: "",
     countryData : null,
     chartData : {
+        confirmed : [], 
+        deaths: [],
+        recovred: [],
+        dates: []
+    },
+    dailyChartData : {
         confirmed : [], 
         deaths: [],
         recovred: [],
@@ -76,10 +88,17 @@ export function dataReducer(state = INIT_STATE ,action :Action ) :DataState {
                 recovred:(<DataActions>action).payload.recovered,
                 dates :(<DataActions>action).payload.dates,
              }
+             let newDataPerDay = {
+                confirmed : (<DataActions>action).payload.confirmedPerDay,
+                deaths : (<DataActions>action).payload.deathPerDay,
+                recovred:(<DataActions>action).payload.recoveredPerDay,
+                dates :(<DataActions>action).payload.dates,
+             }
             return {
                 ...state ,
                 dataState:DataStateEnum.LOADED,
-                chartData: newData
+                chartData: newData,
+                dailyChartData : newDataPerDay
             } 
         case DataActionsTypes.GET_CUMUL_GRAPH_DATA_ERROR: 
                
