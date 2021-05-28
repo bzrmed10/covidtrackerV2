@@ -21,27 +21,19 @@ import { DateCountryData } from '../models/date-country-data';
 export class DataEffects {
         constructor( private effectActions :Actions ,
             private dataService : DataServiceService,private datepipe :DatePipe){}
-         data;
-         tableCase = [];
-         tabledays = [];
-         tabledeath = [];
-         tableRecovered = [];
-         dateCountryData;
-         dateDeathByCountryData;
-         dateRecovredByCountryData;
-         selectedCountryData : DateCountryData [];
-         selectedDeathByCountryData : DateCountryData [];
-         selectedRecoveredByCountryData : DateCountryData [];
-        getDataEffect:Observable<DataActions> = createEffect(
-            
+         
+
+         getDataEffect:Observable<DataActions> = createEffect(
+           
             ()=>this.effectActions.pipe(
                 ofType(DataActionsTypes.GET_DATA),
                 mergeMap((action : DataActions)=>{
+                  let data;
                     return  this.dataService.getGlobalData()
                     .pipe(
                         map(result=>{
-                        this.data = result; 
-                        let items = this.data.filter(item => item.country == action.payload);
+                        data = result; 
+                        let items = data.filter(item => item.country == action.payload);
                         return new GetDataActionSuccess(items);     
                       }),
                       catchError(
@@ -59,26 +51,34 @@ export class DataEffects {
             ()=>this.effectActions.pipe(
                 ofType(DataActionsTypes.GET_CUMUL_GRAPH_DATA),
                 mergeMap((action : DataActions)=>{
+                  let tableCase = [];
+                  let tabledays = [];
+                  let tabledeath = [];
+                  let tableRecovered = [];
+                  let dateCountryData;
+                  let dateDeathByCountryData;
+                  let dateRecovredByCountryData;
+                  let selectedCountryData : DateCountryData [];
+                  let selectedDeathByCountryData : DateCountryData [];
+                  let selectedRecoveredByCountryData : DateCountryData [];
                   const one$: Observable<any> = this.dataService.getDateCountryData().pipe(
                     map(result=>{
-                      console.log("result")
-                      this.dateCountryData = result;
-                      this.selectedCountryData = this.dataService.getNumCasePerDay(this.dateCountryData[action.payload]);
+                      
+                      dateCountryData = result;
+                      selectedCountryData = this.dataService.getNumCasePerDay(dateCountryData[action.payload]);
                     })
                   );
                   const two$: Observable<any> = this.dataService.getDateDeathByCountryData().pipe(
                     map(result2=>{
-                      console.log("result2")
-                      this.dateDeathByCountryData = result2;
-                      this.selectedDeathByCountryData = this.dataService.getNumCasePerDay(this.dateDeathByCountryData[action.payload])
+                      dateDeathByCountryData = result2;
+                      selectedDeathByCountryData = this.dataService.getNumCasePerDay(dateDeathByCountryData[action.payload])
                       
                     })
                   );
                   const three$: Observable<any> =   this.dataService.getDateRecoveredByCountryData().pipe(
                     map(result3=>{
-                      console.log("result3")
-                      this.dateRecovredByCountryData = result3; 
-                      this.selectedRecoveredByCountryData = this.dataService.getNumCasePerDay(this.dateRecovredByCountryData[action.payload])
+                        dateRecovredByCountryData = result3; 
+                      selectedRecoveredByCountryData = this.dataService.getNumCasePerDay(dateRecovredByCountryData[action.payload])
                     })
                   );
 
@@ -88,27 +88,28 @@ export class DataEffects {
 
                         map( result =>{
 
-                            this.selectedCountryData.forEach(cs => {
-                                this.tableCase.push(cs.cases);    
-                                this.tabledays.push( this.datepipe.transform(cs.date, 'yyyy/MM/dd')); 
+                            selectedCountryData.forEach(cs => {
+                                tableCase.push(cs.cases);    
+                                tabledays.push( this.datepipe.transform(cs.date, 'yyyy/MM/dd')); 
                               });
-                              this.selectedDeathByCountryData.forEach(cs => {
-                                  this.tabledeath.push(cs.cases);
+                              selectedDeathByCountryData.forEach(cs => {
+                                  tabledeath.push(cs.cases);
                               });
-                              this.selectedRecoveredByCountryData.forEach(cs => {
-                                this.tableRecovered.push(cs.cases);
+                              selectedRecoveredByCountryData.forEach(cs => {
+                                tableRecovered.push(cs.cases);
                             });
                             
                                 return new GetCumulGraphDataActionSuccess(
-                                    { dates : this.tabledays , 
-                                      confirmed : this.tableCase,
-                                      deaths : this.tabledeath,
-                                      recovered : this.tableRecovered
+                                    { dates : tabledays , 
+                                      confirmed : tableCase,
+                                      deaths : tabledeath,
+                                      recovered : tableRecovered
                                     });
                                 
                           }),
                           catchError(
-                              (err)=>of(new GetCumulGraphDataActionError(err.message))
+                            
+                              (err)=> of(new GetCumulGraphDataActionError(err.message))
                                     )
                       );
 

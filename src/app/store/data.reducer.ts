@@ -63,26 +63,30 @@ export function dataReducer(state = INIT_STATE ,action :Action ) :DataState {
                   
             }      
         case DataActionsTypes.GET_CUMUL_GRAPH_DATA: 
+            
             return {
                 ...state ,
                 dataState:DataStateEnum.LOADING, 
+                            
             }
         case DataActionsTypes.GET_CUMUL_GRAPH_DATA_SUCCESS: 
+             let newData = {
+                confirmed : (<DataActions>action).payload.confirmed,
+                deaths : (<DataActions>action).payload.deaths,
+                recovred:(<DataActions>action).payload.recovered,
+                dates :(<DataActions>action).payload.dates,
+             }
             return {
                 ...state ,
                 dataState:DataStateEnum.LOADED,
-                chartData:{
-                    confirmed : (<DataActions>action).payload.confirmed,
-                    deaths : (<DataActions>action).payload.deaths,
-                    recovred:(<DataActions>action).payload.recovered,
-                    dates :(<DataActions>action).payload.dates
-                } 
+                chartData: newData
             } 
         case DataActionsTypes.GET_CUMUL_GRAPH_DATA_ERROR: 
-          
+               
                 return {
                     ...state ,
                     dataState:DataStateEnum.LOADED, 
+                    errorMessage :(<DataActions>action).payload,
                 }       
                   
         default : return {...state} 

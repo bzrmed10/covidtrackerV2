@@ -39,7 +39,7 @@ export class StatisticsComponent implements OnInit {
 
      this.store.select('dataState').subscribe((state)=>{
        this.country = state.country;
-       console.log(state.chartData);
+       
        this.setChartOptions(
          Highcharts,
          state.chartData.dates,
