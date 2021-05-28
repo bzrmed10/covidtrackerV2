@@ -5,9 +5,9 @@ export enum DataActionsTypes {
     GET_DATA = "[Home] Get data of country",
     GET_DATA_SUCCESS = "[Home] Get data of country success",
     GET_DATA_ERROR  = "[Home] Get data of country error",
-    GET_CUMUL_GRAPH_DATA = "[Statistics] Get data of cumulative graph by country",
-    GET_CUMUL_GRAPH_DATA_SUCCESS = "[Statistics] Get data of cumulative graph by countr success",
-    GET_CUMUL_GRAPH_DATA_ERROR  = "[Statistics] Get data of cumulative graph by countr error",
+    GET_CUMUL_GRAPH_DATA = "[Statistics] Get data for graphs by country",
+    GET_CUMUL_GRAPH_DATA_SUCCESS = "[Statistics] Get data for graphs by country success",
+    GET_CUMUL_GRAPH_DATA_ERROR  = "[Statistics] Get data for graphs by country error",
     
 }
 

@@ -7,10 +7,9 @@ import { StatisticsComponent } from "./components/statistics/statistics.componen
 const routes: Routes = [
     { path : '' , redirectTo:'home' ,pathMatch:'full' },
     { path: 'home', component: HomeComponent },
-    { path:'home/:country' ,component:HomeComponent },
     { path: 'statistics', component: StatisticsComponent },
-    { path:'statistics/:country' ,component:HomeComponent },
     { path: 'history', component: HistoryComponent },
+    {path: '**', redirectTo: 'home'}
     ];
     
     

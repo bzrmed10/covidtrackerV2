@@ -6,7 +6,7 @@
                             
                          </div>
                     
-                        <div class="menuContainer" routerLink="statistics" routerLinkActive="selected" (click)="getcharts()">
+                        <div class="menuContainer" [routerLink]="['statistics']" routerLinkActive="selected" (click)="getcharts()">
                             <img src="/assets/icon/chart.svg"  
                             alt="home" class="menuIcon">
                             <a class="btnMenu" >Statistics</a>

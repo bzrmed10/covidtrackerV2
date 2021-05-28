@@ -24,15 +24,16 @@ export class MenuComponent implements OnInit {
     private store : Store<any>) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      if(params.get('country')){
+        this.defaultCountry = params.get('country');
+       
+      }else{
+        this.defaultCountry ="Morocco";
+        
+      }
+    });
     
-
-
-    if(this.route.snapshot.params['country']){
-      this.defaultCountry = this.route.snapshot.params['country'];
-
-    }else{
-    this.defaultCountry ="Morocco";
-    }
 
     this.dataService.getGlobalData().pipe(map(result=>{
       this.data = result;       
@@ -52,7 +53,8 @@ export class MenuComponent implements OnInit {
   onChangeCountry(country : string){
     this.defaultCountry = country;
     this.router.navigate(['/home',country]);
-    this.store.dispatch(new GetDataAction(country));   
+    this.store.dispatch(new GetDataAction(country)); 
+    //this.store.dispatch(new GetCumulGraphDataAction(country));  
   }
 
   getcharts(){
