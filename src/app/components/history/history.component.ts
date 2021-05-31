@@ -18,7 +18,7 @@ export class HistoryComponent implements OnInit {
   displayedColumns: string[] = [ 'date','numbercasesperday','numberdeathperday','numberrecovredperday'];
   dataSource: MatTableDataSource<DateCountryData>;
   @ViewChild(MatPaginator ,{static:false}) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort ,{static:false}) sort: MatSort;
 
   dataState$ :Observable <DataState> | null = null;
   dataState: DataStateEnum;
