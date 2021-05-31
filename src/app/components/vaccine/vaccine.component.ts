@@ -17,7 +17,7 @@ import { Store } from '@ngrx/store';
 export class VaccineComponent implements OnInit {
 
  
-  displayedColumns: string[] = [ 'date','people_vaccinated','people_fully_vaccinated'];
+  displayedColumns: string[] = [ 'date','total_vaccinations','total_vaccinations_per_hundred','people_vaccinated','people_vaccinated_per_hundred','people_fully_vaccinated','people_fully_vaccinated_per_hundred','daily_vaccinations'];
   dataSource: MatTableDataSource<VaccineData>;
   @ViewChild(MatPaginator ,{static:false}) paginator: MatPaginator;
   @ViewChild(MatSort ,{static:false}) sort: MatSort;

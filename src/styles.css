@@ -58,12 +58,13 @@ body {
     background: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
-    grid-gap: 10px;
+    
     box-shadow: 0px 3px 28px rgb(0 0 0 / 8%);
     border-radius: 12px;
     margin-left: 12px;
     margin-right: 12px;
     margin-bottom: 10px;
+    overflow-x: scroll;
   }
   highcharts-chart {
     border-radius: 12px;
@@ -87,6 +88,12 @@ body {
         grid-template-columns:  1fr ;
         min-height: 500px;
       }
+      .mat-table.vaccine{
+        background-color: rgba(255, 255, 255, 0.959);
+        overflow: auto;   
+        width: 800px;
+      }
+    
       
    }
    @media (min-width: 576px) { 
@@ -145,7 +152,8 @@ body {
   width: 25px;
 }
 
- 
+
+
 
 
       .menu{

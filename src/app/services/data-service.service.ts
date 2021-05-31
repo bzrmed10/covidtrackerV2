@@ -239,6 +239,9 @@ export class DataServiceService {
             people_fully_vaccinated : +cols[5],
             daily_vaccinations_raw : +cols[6],
             daily_vaccinations : +cols[7],
+            total_vaccinations_per_hundred : +cols[8],
+            people_vaccinated_per_hundred : +cols[9],
+            people_fully_vaccinated_per_hundred : +cols[10],
 
           };
            data.push(cs);

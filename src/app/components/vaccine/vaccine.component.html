@@ -2,36 +2,42 @@
 <div class="containerChart">
     
     
-    <table mat-table [dataSource]="dataSource" matSort  matSortActive="date" matSortDirection="desc">
+    <table mat-table [dataSource]="dataSource" matSort  matSortActive="date" matSortDirection="desc" class="vaccine">
       
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Date</b> </th>
         <td mat-cell *matCellDef="let row"><b> {{row.date |date}}</b> </td>
       </ng-container>
-     
-
-    
+      
+      <ng-container matColumnDef="total_vaccinations">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Total vaccinations</b> </th>
+        <td mat-cell *matCellDef="let row" class="blue"> 
+            {{row.total_vaccinations | number}} </td>
+      </ng-container>
+      <ng-container matColumnDef="total_vaccinations_per_hundred">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Per 100</b> </th>
+        <td mat-cell *matCellDef="let row" class="gray">  {{row.total_vaccinations_per_hundred | number}} </td>
+      </ng-container>
       <ng-container matColumnDef="people_vaccinated">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>People vaccinated</b> </th>
-        <td mat-cell *matCellDef="let row" class="gray"> 
-            
-            {{row.people_vaccinated | number}} </td>
+        <td mat-cell *matCellDef="let row" class="blue">  {{row.people_vaccinated | number}} </td>
       </ng-container>
-
-
-   
-   <!---
-    <ng-container matColumnDef="daily_vaccinations">
+      <ng-container matColumnDef="people_vaccinated_per_hundred">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Per 100</b> </th>
+        <td mat-cell *matCellDef="let row" class="gray">  {{row.people_vaccinated_per_hundred | number}} </td>
+      </ng-container>
+      <ng-container matColumnDef="people_fully_vaccinated">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Fully vaccinated</b> </th>
+        <td mat-cell *matCellDef="let row" class="blue">  {{row.people_fully_vaccinated | number}} </td>
+      </ng-container>
+      <ng-container matColumnDef="people_fully_vaccinated_per_hundred">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Per 100</b> </th>
+        <td mat-cell *matCellDef="let row" class="gray">  {{row.people_fully_vaccinated_per_hundred | number}} </td>
+      </ng-container>
+      <ng-container matColumnDef="daily_vaccinations">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Daily </b> </th>
         <td mat-cell *matCellDef="let row" class="green"> + {{row.daily_vaccinations | number}} </td>
       </ng-container>
-   --->   <ng-container matColumnDef="people_fully_vaccinated">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Fully vaccinated</b> </th>
-        <td mat-cell *matCellDef="let row" class="gray"> 
-            
-             {{row.people_fully_vaccinated | number}} </td>
-      </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   
