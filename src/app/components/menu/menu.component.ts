@@ -4,7 +4,7 @@ import { DataServiceService } from 'src/app/services/data-service.service';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { GetCumulGraphDataAction, GetDataAction, GetTableDataAction } from 'src/app/store/data.actions';
+import { GetCumulGraphDataAction, GetDataAction, GetTableDataAction, GetVaccinationDataAction } from 'src/app/store/data.actions';
 
 @Component({
   selector: 'app-menu',
@@ -63,6 +63,10 @@ export class MenuComponent implements OnInit {
 
   getHistoryTable(){
     this.store.dispatch(new GetTableDataAction(this.defaultCountry));
+  }
+
+  getVaccinationData(){
+    this.store.dispatch(new GetVaccinationDataAction(this.defaultCountry));
   }
 
 }

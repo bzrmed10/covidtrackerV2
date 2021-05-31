@@ -2,6 +2,7 @@
 import { Action } from "@ngrx/store";
 import { AllDataByCountry } from "../models/all-data-by-country";
 import { GlobalDataSummary } from "../models/global-data";
+import { VaccineData } from "../models/vaccine-data";
 import { DataActions, DataActionsTypes } from "./data.actions";
 
 
@@ -28,6 +29,7 @@ export interface DataState {
         dates:[]
     },
     tableData : AllDataByCountry[],
+    vaccineData : VaccineData [],
     errorMessage : string,
     dataState : DataStateEnum,
     
@@ -50,6 +52,7 @@ const INIT_STATE :DataState = {
         dates: []
     },
     tableData : [],
+    vaccineData : [],
     errorMessage : "",
     dataState : DataStateEnum.INITIAL ,
 
@@ -131,7 +134,28 @@ export function dataReducer(state = INIT_STATE ,action :Action ) :DataState {
                     ...state ,
                     dataState:DataStateEnum.ERROR, 
                     errorMessage :(<DataActions>action).payload,
-                }                   
+                } 
+        case DataActionsTypes.GET_VACCINE_DATA: 
+            
+                return {
+                    ...state ,
+                    dataState:DataStateEnum.LOADING, 
+                                
+                }
+        case DataActionsTypes.GET_VACCINE_DATA_SUCCESS: 
+                let vacData :VaccineData[];
+                vacData = (<DataActions>action).payload;
+                   return {
+                       ...state ,
+                       dataState:DataStateEnum.LOADED, 
+                       vaccineData : vacData,        
+                   }        
+        case DataActionsTypes.GET_VACCINE_DATA_ERROR:           
+                   return {
+                       ...state ,
+                       dataState:DataStateEnum.ERROR, 
+                       errorMessage :(<DataActions>action).payload,
+                   }                                  
         default : return {...state} 
     }
 }

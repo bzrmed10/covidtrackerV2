@@ -1,6 +1,7 @@
 import { Action } from "@ngrx/store";
 import { AllDataByCountry } from "../models/all-data-by-country";
 import { DateCountryData } from "../models/date-country-data";
+import { VaccineData } from "../models/vaccine-data";
 
 export enum DataActionsTypes {
     GET_DATA = "[Home] Get data of country",
@@ -12,6 +13,9 @@ export enum DataActionsTypes {
     GET_TABLE_DATA = "[History] Get data for table by country",
     GET_TABLE_DATA_SUCCESS = "[History] Get data for table by country success",
     GET_TABLE_DATA_ERROR  = "[History] Get data for table by country error",
+    GET_VACCINE_DATA = "[Vaccine] Get vaccination data  by country",
+    GET_VACCINE_DATA_SUCCESS = "[Vaccine] Get vaccination data by country success",
+    GET_VACCINE_DATA_ERROR  = "[Vaccine] Get vaccination data by country error",
 }
 
 
@@ -74,9 +78,24 @@ export class GetTableDataActionError implements Action {
     constructor( public payload:string){}
 }
 
+export class GetVaccinationDataAction implements Action {
+    type : DataActionsTypes = DataActionsTypes.GET_VACCINE_DATA;
+    constructor( public payload:string){}
 
+}
+export class GetVaccinationDataActionSuccess implements Action {
+    type : DataActionsTypes = DataActionsTypes.GET_VACCINE_DATA_SUCCESS;
+    constructor( public payload:VaccineData []){}
+
+}
+export class GetVaccinationDataActionError implements Action {
+    type : DataActionsTypes = DataActionsTypes.GET_VACCINE_DATA_ERROR;
+    constructor( public payload:string){}
+
+}
 
 export type DataActions = 
 GetDataAction | GetDataActionSuccess | GetDataActionError |
 GetCumulGraphDataAction | GetCumulGraphDataActionSuccess | GetCumulGraphDataActionError |
-GetTableDataAction | GetTableDataActionSuccess | GetTableDataActionError;
+GetTableDataAction | GetTableDataActionSuccess | GetTableDataActionError |
+GetVaccinationDataAction | GetVaccinationDataActionSuccess | GetVaccinationDataActionError;

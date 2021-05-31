@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSortModule} from '@angular/material/sort';
+import { VaccineComponent } from './components/vaccine/vaccine.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import {MatSortModule} from '@angular/material/sort';
     HomeComponent,
     MenuComponent,
     StatisticsComponent,
-    HistoryComponent
+    HistoryComponent,
+    VaccineComponent
   ],
   imports: [
     BrowserModule,

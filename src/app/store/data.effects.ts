@@ -12,7 +12,9 @@ import {
     GetCumulGraphDataActionSuccess,
     GetCumulGraphDataActionError,
     GetTableDataActionSuccess,
-    GetTableDataActionError
+    GetTableDataActionError,
+    GetVaccinationDataActionSuccess,
+    GetVaccinationDataActionError
 } from './data.actions';
 import { DatePipe } from '@angular/common';
 import { DateCountryData } from '../models/date-country-data';
@@ -140,13 +142,7 @@ export class DataEffects {
           ()=>this.effectActions.pipe(
               ofType(DataActionsTypes.GET_TABLE_DATA),
               mergeMap((action : DataActions)=>{
-                let tableCase = [];
-                let tabledays = [];
-                let tabledeath = [];
-                let tableRecovered = [];
-                let casesPerDay = [];
-                let deathPerDay = [];
-                let recoveredPerDay = [];
+              
                 let dateCountryData;
                 let dateDeathByCountryData;
                 let dateRecovredByCountryData;
@@ -199,4 +195,28 @@ export class DataEffects {
                   }))
           
       )
+
+
+      getVaccineDataEffect:Observable<DataActions> = createEffect(
+            
+        ()=>this.effectActions.pipe(
+          ofType(DataActionsTypes.GET_VACCINE_DATA),
+          mergeMap((action : DataActions)=>{
+            let data;
+              return  this.dataService.getVaccinationData(action.payload)
+              .pipe(
+                  map(result=>{
+                  data = result; 
+                  return new GetVaccinationDataActionSuccess(data);     
+                }),
+                catchError(
+                    (err)=>of(new GetVaccinationDataActionError(err.message))
+                          )
+                    )
+
+              }))
+        
+    )
+
+      
     }

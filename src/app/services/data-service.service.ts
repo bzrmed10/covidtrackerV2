@@ -4,18 +4,18 @@ import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { DateCountryData } from '../models/date-country-data';
+import { VaccineData } from '../models/vaccine-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataServiceService {
 
-  public dataChange= new Subject<GlobalDataSummary[]>();
-  public caseType = new Subject<string>();
   private dateCountryDataUrl = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv';
   private dateDeathByCountryDataUrl ='https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
   private dateRecoveredByCountryDataUrl = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv';
   private baseUrl = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/';
+  private vaccineData = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv";
   private globalDataUrl = '';
   extension = '.csv';
   day;
@@ -216,6 +216,40 @@ export class DataServiceService {
       console.log("tab not same length");
     
     }
+  }
+
+
+
+  getVaccinationData(c : string){
+    
+    return this.http.get(this.vaccineData,{responseType : 'text'})
+    .pipe(map(result=>{
+      let data : VaccineData[] = [];
+      let rows = result.split('\n');
+      rows.splice(0,1);
+      let raw = {};
+      rows.forEach(row=>{
+        let cols = row.split(/,(?=\S)/);
+        if(cols[0] == c && +cols[4] != 0){
+          let cs = {
+            country :cols[0],
+            date : new Date(Date.parse(cols[2])),
+            total_vaccinations : +cols[3],
+            people_vaccinated : +cols[4],
+            people_fully_vaccinated : +cols[5],
+            daily_vaccinations_raw : +cols[6],
+            daily_vaccinations : +cols[7],
+
+          };
+           data.push(cs);
+          
+        }
+        
+        
+      })
+      return data;
+      
+    }));
   }
   
 }
