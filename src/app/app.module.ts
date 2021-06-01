@@ -23,6 +23,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSortModule} from '@angular/material/sort';
 import { VaccineComponent } from './components/vaccine/vaccine.component';
+import { WebsitePipe } from './pipes/website.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { VaccineComponent } from './components/vaccine/vaccine.component';
     MenuComponent,
     StatisticsComponent,
     HistoryComponent,
-    VaccineComponent
+    VaccineComponent,
+    WebsitePipe
   ],
   imports: [
     BrowserModule,

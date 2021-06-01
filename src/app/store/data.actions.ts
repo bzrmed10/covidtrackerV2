@@ -2,6 +2,7 @@ import { Action } from "@ngrx/store";
 import { AllDataByCountry } from "../models/all-data-by-country";
 import { DateCountryData } from "../models/date-country-data";
 import { VaccineData } from "../models/vaccine-data";
+import { InfoVaccin } from '../models/infoVaccin';
 
 export enum DataActionsTypes {
     GET_DATA = "[Home] Get data of country",
@@ -85,7 +86,7 @@ export class GetVaccinationDataAction implements Action {
 }
 export class GetVaccinationDataActionSuccess implements Action {
     type : DataActionsTypes = DataActionsTypes.GET_VACCINE_DATA_SUCCESS;
-    constructor( public payload:VaccineData []){}
+    constructor( public payload:{data :VaccineData [] , infoVaccine : InfoVaccin}){}
 
 }
 export class GetVaccinationDataActionError implements Action {

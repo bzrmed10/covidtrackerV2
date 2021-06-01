@@ -19,6 +19,7 @@ import {
 import { DatePipe } from '@angular/common';
 import { DateCountryData } from '../models/date-country-data';
 import { AllDataByCountry } from '../models/all-data-by-country';
+import { InfoVaccin } from '../models/infoVaccin';
 
 
 
@@ -202,12 +203,16 @@ export class DataEffects {
         ()=>this.effectActions.pipe(
           ofType(DataActionsTypes.GET_VACCINE_DATA),
           mergeMap((action : DataActions)=>{
+            let info : InfoVaccin;
+            this.dataService.getInfoVaccineByCountry(action.payload).subscribe(result=>{
+              info = result;
+            });
             let data;
               return  this.dataService.getVaccinationData(action.payload)
               .pipe(
                   map(result=>{
                   data = result; 
-                  return new GetVaccinationDataActionSuccess(data);     
+                  return new GetVaccinationDataActionSuccess({data : data , infoVaccine : info});     
                 }),
                 catchError(
                     (err)=>of(new GetVaccinationDataActionError(err.message))

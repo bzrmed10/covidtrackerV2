@@ -1,4 +1,43 @@
 
+<div class="containerInfoVac">
+  <div class="boxInfo">
+    <p class="gray"><b>Reported Date</b></p>
+    <ng-container *ngIf="dataState == DataStateEnum.LOADING">
+                    <div class="d-flex align-items-center">
+                        <div class="spinner-grow spinner-grow-sm blue"></div>
+                     </div>
+                </ng-container>
+    <p class="smallText blue" *ngIf="dataState == DataStateEnum.LOADED">{{ infoVac.date | date }}</p>
+  </div>
+  <div class="boxInfo">
+    <p class="gray"><b>Reported Doses</b></p>
+    <ng-container *ngIf="dataState == DataStateEnum.LOADING">
+      <div class="d-flex align-items-center">
+          <div class="spinner-grow spinner-grow-sm blue"></div>
+       </div>
+  </ng-container>
+    <p class="smallText blue" *ngIf="dataState == DataStateEnum.LOADED">{{ infoVac.total_vaccinations | number }}</p>
+  </div>
+  <div class="boxInfo">
+    <p class="gray"><b>Source</b></p>
+    <ng-container *ngIf="dataState == DataStateEnum.LOADING">
+      <div class="d-flex align-items-center">
+          <div class="spinner-grow spinner-grow-sm blue"></div>
+       </div>
+  </ng-container>
+    <p class="smallText blue" *ngIf="dataState == DataStateEnum.LOADED">{{ infoVac.source | website}}</p>
+  </div>
+  <div class="boxInfo">	
+    <p class="gray"><b>Vaccine(s) used</b></p>
+    <ng-container *ngIf="dataState == DataStateEnum.LOADING">
+      <div class="d-flex align-items-center">
+          <div class="spinner-grow spinner-grow-sm blue"></div>
+       </div>
+  </ng-container>
+    <p class="smallText blue" *ngIf="dataState == DataStateEnum.LOADED">{{ infoVac.vaccine  }}</p>
+  </div>
+</div>
+
 <div class="containerChart">
     
     

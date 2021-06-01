@@ -4,6 +4,7 @@ import { AllDataByCountry } from "../models/all-data-by-country";
 import { GlobalDataSummary } from "../models/global-data";
 import { VaccineData } from "../models/vaccine-data";
 import { DataActions, DataActionsTypes } from "./data.actions";
+import { InfoVaccin } from '../models/infoVaccin';
 
 
 export enum DataStateEnum {
@@ -29,7 +30,7 @@ export interface DataState {
         dates:[]
     },
     tableData : AllDataByCountry[],
-    vaccineData : VaccineData [],
+    vaccineData : { data : VaccineData [], info : InfoVaccin},
     errorMessage : string,
     dataState : DataStateEnum,
     
@@ -52,7 +53,7 @@ const INIT_STATE :DataState = {
         dates: []
     },
     tableData : [],
-    vaccineData : [],
+    vaccineData : {data:[] ,info : null},
     errorMessage : "",
     dataState : DataStateEnum.INITIAL ,
 
@@ -144,11 +145,13 @@ export function dataReducer(state = INIT_STATE ,action :Action ) :DataState {
                 }
         case DataActionsTypes.GET_VACCINE_DATA_SUCCESS: 
                 let vacData :VaccineData[];
-                vacData = (<DataActions>action).payload;
+                let infoVac : InfoVaccin;
+                vacData = (<DataActions>action).payload.data;
+                infoVac = (<DataActions>action).payload.infoVaccine;
                    return {
                        ...state ,
                        dataState:DataStateEnum.LOADED, 
-                       vaccineData : vacData,        
+                       vaccineData : {data : vacData , info : infoVac },        
                    }        
         case DataActionsTypes.GET_VACCINE_DATA_ERROR:           
                    return {

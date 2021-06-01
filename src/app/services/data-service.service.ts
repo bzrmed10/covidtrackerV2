@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { DateCountryData } from '../models/date-country-data';
 import { VaccineData } from '../models/vaccine-data';
+import { InfoVaccin } from '../models/infoVaccin';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class DataServiceService {
   private dateRecoveredByCountryDataUrl = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv';
   private baseUrl = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/';
   private vaccineData = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv";
+  private vacccinedataByCountry = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/country_data/";
   private globalDataUrl = '';
   extension = '.csv';
   day;
@@ -24,6 +26,7 @@ export class DataServiceService {
   constructor(private http : HttpClient) { 
 
     let date = new Date();
+    date.setDate(date.getDate() - 1);
     this.day = date.getDate() - 1;
     this.month = date.getMonth() + 1;
     this.year = date.getFullYear();
@@ -194,6 +197,27 @@ export class DataServiceService {
     }
     
     return data;
+  }
+
+  getInfoVaccineByCountry(country : string){
+        
+    return this.http.get(this.vacccinedataByCountry+country+this.extension,{responseType : 'text'})
+    .pipe(map(result=>{
+      let data : InfoVaccin ;
+      let rows = result.split('\n');
+      rows.splice(0,1);
+      let cols = rows[rows.length-2].split(/,(?=\S)/);
+      data = {
+
+        country : cols[0],
+        date : new Date(Date.parse(cols[1])),
+        total_vaccinations : +cols[4],
+        vaccine : cols[2],
+        source : cols[3]
+      }
+      return data ;
+      
+    }));
   }
 
   mergeData(tab1 :DateCountryData[],tab2:DateCountryData[],tab3:DateCountryData[]){

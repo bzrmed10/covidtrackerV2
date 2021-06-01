@@ -10,5 +10,5 @@ export interface  VaccineData{
     people_vaccinated_per_hundred ?: number,
     people_fully_vaccinated_per_hundred ?: number,
     total_vaccinations_per_hundred  ?:number,
-
+    
 }

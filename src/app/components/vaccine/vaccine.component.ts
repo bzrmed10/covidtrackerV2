@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { DataState, DataStateEnum } from 'src/app/store/data.reducer';
+import { InfoVaccin } from '../../models/infoVaccin';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -19,6 +20,7 @@ export class VaccineComponent implements OnInit {
  
   displayedColumns: string[] = [ 'date','total_vaccinations','total_vaccinations_per_hundred','people_vaccinated','people_vaccinated_per_hundred','people_fully_vaccinated','people_fully_vaccinated_per_hundred','daily_vaccinations'];
   dataSource: MatTableDataSource<VaccineData>;
+  infoVac : InfoVaccin;
   @ViewChild(MatPaginator ,{static:false}) paginator: MatPaginator;
   @ViewChild(MatSort ,{static:false}) sort: MatSort;
 
@@ -31,7 +33,8 @@ export class VaccineComponent implements OnInit {
 
     this.store.select('dataState').subscribe((state)=>{
       this.dataState = state.dataState;
-      this.dataSource = new MatTableDataSource(state.vaccineData);
+      this.infoVac = state.vaccineData.info;
+      this.dataSource = new MatTableDataSource(state.vaccineData.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 
