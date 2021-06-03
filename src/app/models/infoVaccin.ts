@@ -3,7 +3,7 @@ export interface  InfoVaccin{
     country : string,
     date ?: Date,
     total_vaccinations ?: number,
-    vaccine ?: string,
+    vaccine ?: string[],
     source ?: string,
 
 }

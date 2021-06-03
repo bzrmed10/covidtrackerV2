@@ -54,7 +54,7 @@ body {
     display: grid;
     margin: 12px;
     grid-gap: 10px;
-    grid-template-columns: 49% 49%;
+  
   }
 .boxInfo{
         background: #FFFFFF;
@@ -63,10 +63,20 @@ body {
         display:flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
+        justify-content: center;
         padding: 15px;
 }
-
+.boxInfoBlue{
+  
+  background: #82b2f1;
+  box-shadow: 0px 3px 28px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
   .containerChart {
     font-size: 20px;
     /*color: #797979;*/
@@ -111,16 +121,27 @@ body {
       .boxInfo{
         color: rgba(0,0,0,.82);
         width: 100%;
-        height: 100px;
+        height: 150px;
         
       }
-    
+      .containerInfoVac{
+        grid-template-columns: 49% 49% 49% 49%;
+        overflow-x: scroll;
+        padding: 7px;
+      }
       
    }
    @media (min-width: 576px) { 
     .container {
         grid-template-columns: 1fr 1fr ;
         min-height: 400px;
+      }
+      .containerInfoVac{
+        grid-template-columns: 49% 49%;
+      }
+      .boxInfo{
+        height: 100px;
+        
       }
     
    }
@@ -131,6 +152,13 @@ body {
       }
       .iconContainer{
         padding-left: 10px;
+      }
+      .containerInfoVac{
+        grid-template-columns: 49% 49%;
+      }
+      .boxInfo{
+        height: 100px;
+        
       }
    }
 
@@ -162,6 +190,9 @@ body {
   }
   .gray{
     color: #00000066;
+  }
+  .white{
+    color: #ffffffff;
   }
   .menuList{
     display: flex;

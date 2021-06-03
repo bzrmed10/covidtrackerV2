@@ -53,7 +53,7 @@ const INIT_STATE :DataState = {
         dates: []
     },
     tableData : [],
-    vaccineData : {data:[] ,info : null},
+    vaccineData : {data:[] ,info : { country : ""}},
     errorMessage : "",
     dataState : DataStateEnum.INITIAL ,
 
