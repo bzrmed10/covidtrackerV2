@@ -7,7 +7,7 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-
+import am4geodata_worldMorocco from "@amcharts/amcharts4-geodata/worldMoroccoHigh";
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -31,9 +31,11 @@ export class MapComponent  {
     ngAfterViewInit() {
       // Create map instance
 let chart = am4core.create("chartdiv", am4maps.MapChart);
-
+chart.logo.disabled = true;
+    // Set map definition
+    chart.geodata = am4geodata_worldMorocco;
 let title = chart.titles.create();
-title.text = "[bold font-size: 20]Population of the World in 2011[/]\n";
+//title.text = "[bold font-size: 20]Population of the World in 2011[/]\n";
 title.textAlign = "middle";
 
 let mapData = [
@@ -209,7 +211,7 @@ let mapData = [
 ];
 
 // Set map definition
-chart.geodata = am4geodata_worldLow;
+//chart.geodata = am4geodata_worldLow;
 
 // Set projection
 chart.projection = new am4maps.projections.Miller();
@@ -244,7 +246,7 @@ imageSeries.heatRules.push({
 })
 
 imageTemplate.adapter.add("latitude", function(latitude, target) {
-  let polygon = polygonSeries.getPolygonById(target.dataItem.dataContext.id);
+  let polygon = polygonSeries.getPolygonById(target.dataItem.dataContext["id"]);
   if(polygon){
     return polygon.visualLatitude;
    }
@@ -252,7 +254,7 @@ imageTemplate.adapter.add("latitude", function(latitude, target) {
 })
 
 imageTemplate.adapter.add("longitude", function(longitude, target) {
-  let polygon = polygonSeries.getPolygonById(target.dataItem.dataContext.id);
+  let polygon = polygonSeries.getPolygonById(target.dataItem.dataContext["id"]);
   if(polygon){
     return polygon.visualLongitude;
    }
