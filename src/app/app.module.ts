@@ -24,6 +24,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSortModule} from '@angular/material/sort';
 import { VaccineComponent } from './components/vaccine/vaccine.component';
 import { WebsitePipe } from './pipes/website.pipe';
+import { MapComponent } from './components/map/map.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { WebsitePipe } from './pipes/website.pipe';
     StatisticsComponent,
     HistoryComponent,
     VaccineComponent,
-    WebsitePipe
+    WebsitePipe,
+    MapComponent
   ],
   imports: [
     BrowserModule,

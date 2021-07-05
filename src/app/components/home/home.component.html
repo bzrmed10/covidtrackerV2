@@ -1,3 +1,4 @@
+<app-map></app-map>
 <ng-container  *ngIf="dataState$ | async as state" [ngSwitch] ="state.dataState" >
 
     <ng-container *ngSwitchCase="DataStateEnum.ERROR">
