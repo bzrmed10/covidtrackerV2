@@ -5,9 +5,8 @@ import { isPlatformBrowser } from '@angular/common';
 /* Imports */
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
-import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import am4geodata_worldMorocco from "@amcharts/amcharts4-geodata/worldMoroccoHigh";
+import am4geodata_worldMoroccoHigh from "@amcharts/amcharts4-geodata/worldMoroccoHigh";
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -33,7 +32,7 @@ export class MapComponent  {
 let chart = am4core.create("chartdiv", am4maps.MapChart);
 chart.logo.disabled = true;
     // Set map definition
-    chart.geodata = am4geodata_worldMorocco;
+    chart.geodata = am4geodata_worldMoroccoHigh;
 let title = chart.titles.create();
 //title.text = "[bold font-size: 20]Population of the World in 2011[/]\n";
 title.textAlign = "middle";
@@ -210,8 +209,6 @@ let mapData = [
   { "id":"ZW", "name":"Zimbabwe", "value":12754378, "color":chart.colors.getIndex(2) }
 ];
 
-// Set map definition
-//chart.geodata = am4geodata_worldLow;
 
 // Set projection
 chart.projection = new am4maps.projections.Miller();
