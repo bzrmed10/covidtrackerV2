@@ -207,15 +207,15 @@ export class DataServiceService {
       let rows = result.split('\n');
       rows.splice(0,1);
       let cols = rows[rows.length-2].split(/,(?=\S)/);
-      let vaccine = cols[2].slice(1);
+      let vaccine = cols[3].slice(1);
       vaccine = vaccine.substring(0, vaccine.length - 1);
       data = {
 
-        country : cols[0],
-        date : new Date(Date.parse(cols[1])),
-        total_vaccinations : +cols[4],
+        country : cols[2],
+        date : new Date(Date.parse(cols[0])),
+        total_vaccinations : +cols[1],
         vaccine : vaccine.split(',') ,
-        source : cols[3]
+        source : cols[4]
       }
       return data ;
       
